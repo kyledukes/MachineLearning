@@ -58,9 +58,9 @@ def appending(docs, category):
 		
 	# iterating over the list of tuples
 	for w in tagged:
-		# slicing the first letter of the second item in the tuple
-		if w[1][0] in allowed_word_types:
-			allowed_words.append(w[0].lower())
+            # slicing the first letter of the second item in the tuple
+	    f w[1][0] in allowed_word_types:
+       	    allowed_words.append(w[0].lower())
 
 
 # open and decode each file in the files dictionary
