@@ -15,25 +15,25 @@ import random
 # inherit .classify() from ClassifierI
 class VoteClassifier(ClassifierI):
 	
-	def __init__(self, *classifiers):
-		self._classifiers = classifiers
+    def __init__(self, *classifiers):
+        self._classifiers = classifiers
 		
-	def classify(self, features):
-		votes = []
-		for c in self._classifiers:
-			v = c.classify(features)
-			votes.append(v)
-		return max(set(votes), key=votes.count) # mode without importing mode
+    def classify(self, features):
+        votes = []
+        for c in self._classifiers:
+	    v = c.classify(features)
+	    votes.append(v)
+	return max(set(votes), key=votes.count) # mode without importing mode
 		
-	def confidence(self, features):
-		votes = []
-		for c in self._classifiers:
-			v = c.classify(features)
-			votes.append(v)
+    def confidence(self, features):
+        votes = []
+        for c in self._classifiers:
+	    v = c.classify(features)
+	    votes.append(v)
 		
-		choice_votes = votes.count(max(set(votes), key=votes.count)) # mode
-		conf = float(choice_votes) / len(votes)
-		return conf
+	choice_votes = votes.count(max(set(votes), key=votes.count)) # mode
+	conf = float(choice_votes) / len(votes)
+        return conf
 
 
 files = {"POSITIVE_FILENAME": "pos",
@@ -50,7 +50,7 @@ allowed_word_types = ["J"]
 
 # tokenize, tag, and append documents with their categories
 def appending(docs, category):
-	for doc in docs.split('\n'):
+    for doc in docs.split('\n'):
 		# append tuples to the list of documents
 		documents.append( (doc, category) )
 		words = word_tokenize(doc)
