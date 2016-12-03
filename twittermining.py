@@ -20,19 +20,19 @@ tweets = [tweet.text for tweet in cursor.items(1000)]
 sentiments = []
 
 for t in tweets:
-	sentiment_value, confidence = s.sentiment(t)
-	if confidence > 0.80:
-		sentiments.append(sentiment_value)
-		print t, sentiment_value, confidence
+    sentiment_value, confidence = s.sentiment(t)
+    if confidence > 0.80:
+        sentiments.append(sentiment_value)
+	print t, sentiment_value, confidence
 
 x = 0.00
 for sent in sentiments:
-	if sent == "pos":
-		x += 1.00
+    if sent == "pos":
+        x += 1.00
 
 print len(sentiments)
 try:
-	print "%"+str(x / len(sentiments) * 100)
+    print "%"+str(x / len(sentiments) * 100)
 except ZeroDivisionError:
-	pass
+    pass
 
