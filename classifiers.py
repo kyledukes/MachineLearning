@@ -23,7 +23,7 @@ class VoteClassifier(ClassifierI):
         for c in self._classifiers:
 	    v = c.classify(features)
 	    votes.append(v)
-	return max(set(votes), key=votes.count) # mode without importing mode
+	return max(set(votes), key=votes.count) # calculate the mode
 		
     def confidence(self, features):
         votes = []
@@ -78,7 +78,7 @@ save_documents.close()
 # order allowed_words by frequency distribution from most common to least common
 allowed_words = nltk.FreqDist(allowed_words)
 
-#create a list of of the most common words without the sentiment tag values
+# create a list of of the most common words without the sentiment values
 word_features = list(allowed_words.keys())[:8000]
 
 
@@ -97,7 +97,7 @@ def find_features(sentence):
     # return the dictionary of words as keys and booleans as values
     return features
 
-# featuresets is a list of tuples each containing a document and a category
+# featuresets is a list of tuples each containing a dictionary of {"word": boolean} and the category
 featuresets = [(find_features(sentence), category) for (sentence, category) in documents]
                 # ^only gets the key from the features dictionary
 
