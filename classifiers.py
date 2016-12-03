@@ -37,9 +37,9 @@ class VoteClassifier(ClassifierI):
 
 
 files = {"POSITIVE_FILENAME": "pos",
-		 "NEGATIVE_FILENAME": "neg",
-		 "positive.txt": "pos",
-		 "negative.txt": "neg"}
+	 "NEGATIVE_FILENAME": "neg",
+	 "positive.txt": "pos",
+	 "negative.txt": "neg"}
 		 
 
 # this will be a list of tuples containing documents and categories
