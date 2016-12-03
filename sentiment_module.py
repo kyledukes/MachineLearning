@@ -16,25 +16,26 @@ from unidecode import unidecode
 
 
 class VoteClassifier(ClassifierI):
-	def __init__(self, *classifiers):
-		self._classifiers = classifiers
+	
+    def __init__(self, *classifiers):
+        self._classifiers = classifiers
 		
-	def classify(self, features):
-		votes = []
-		for c in self._classifiers:
-			v = c.classify(features)
-			votes.append(v)
-		return max(set(votes), key=votes.count) # calculate the mode
+    def classify(self, features):
+        votes = []
+        for c in self._classifiers:
+	    v = c.classify(features)
+	    votes.append(v)
+	return max(set(votes), key=votes.count) # mode without importing mode
 		
-	def confidence(self, features):
-		votes = []
-		for c in self._classifiers:
-			v = c.classify(features)
-			votes.append(v)
-			
-		choice_votes = votes.count(max(set(votes), key=votes.count)) # mode
-		conf = float(choice_votes) / len(votes)
-		return conf
+    def confidence(self, features):
+        votes = []
+        for c in self._classifiers:
+	    v = c.classify(features)
+	    votes.append(v)
+		
+	choice_votes = votes.count(max(set(votes), key=votes.count)) # mode
+	conf = float(choice_votes) / len(votes)
+        return conf
 
 opins_sents_file = open("opins_sents.pickle", "rb")
 opins_sents = pickle.load(opins_sents_file)
@@ -46,13 +47,13 @@ word_features = pickle.load(word_features_file)
 word_features_file.close()
 
 def find_features(opin):
-	words = word_tokenize(opin)
-	features = {}
+    words = word_tokenize(opin)
+    features = {}
 	
-	for w in word_features:
-		features[w] = (w in words) # boolean, if w is in words, it will be True
+    for w in word_features:
+        features[w] = (w in words) # boolean, if w is in words, it will be True
 	
-	return features
+    return features
 
 featuresets_file = open("featuresets.pickle", "rb")
 featuresets = pickle.load(featuresets_file)
@@ -96,12 +97,12 @@ open_file.close()
 
 # set voted_classifier to an instance of the class VoteClassifier 
 voted_classifier = VoteClassifier(classifier, 
-								  MultinomialNB_classifier, 
-								  BernoulliNB_classifier, 
-								  LogisticRegression_classifier, 
-								  NuSVC_classifier,
-								  LinearSVC_classifier,
-								  SGDC_classifier)
+				  MultinomialNB_classifier, 
+				  BernoulliNB_classifier, 
+	 			  LogisticRegression_classifier, 
+				  NuSVC_classifier,
+				  LinearSVC_classifier,
+				  SGDC_classifier)
 
 
 def sentiment(text):
