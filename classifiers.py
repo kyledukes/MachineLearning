@@ -130,11 +130,11 @@ SGDC_classifier = SklearnClassifier(SGDClassifier())
 
 
 algos = {"MultinomialNB_classifier": MultinomialNB_classifier,
-		 "BernoulliNB_classifier": BernoulliNB_classifier,
-		 "LogisticRegression_classifier": LogisticRegression_classifier,
-		 "LinearSVC_classifier": LinearSVC_classifier,
-		 "NuSVC_classifier": NuSVC_classifier,
-		 "SGDC_classifier": SGDC_classifier}
+	 "BernoulliNB_classifier": BernoulliNB_classifier,
+	 "LogisticRegression_classifier": LogisticRegression_classifier,
+	 "LinearSVC_classifier": LinearSVC_classifier,
+	 "NuSVC_classifier": NuSVC_classifier,
+	 "SGDC_classifier": SGDC_classifier}
 
 
 for i in algos.items():
