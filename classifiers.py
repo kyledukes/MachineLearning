@@ -51,23 +51,23 @@ allowed_word_types = ["J"]
 # tokenize, tag, and append documents with their categories
 def appending(docs, category):
     for doc in docs.split('\n'):
-		# append tuples to the list of documents
-		documents.append( (doc, category) )
-		words = word_tokenize(doc)
-		tagged = nltk.pos_tag(words) # pos_tag()returns a list of tuples
+        # append tuples to the list of documents
+	documents.append( (doc, category) )
+	words = word_tokenize(doc)
+	tagged = nltk.pos_tag(words) # pos_tag()returns a list of tuples
 		
-		# iterating over the list of tuples
-		for w in tagged:
-			# slicing the first letter of the second item in the tuple
-			if w[1][0] in allowed_word_types:
-				allowed_words.append(w[0].lower())
+	# iterating over the list of tuples
+	for w in tagged:
+		# slicing the first letter of the second item in the tuple
+		if w[1][0] in allowed_word_types:
+			allowed_words.append(w[0].lower())
 
 
 # open and decode each file in the files dictionary
 for f in files.items():
-	data = open(f[0], "r").read()
-	docs = data.decode('unicode_escape').encode('ascii','ignore')
-	appending(docs, f[1])
+    data = open(f[0], "r").read()
+    docs = data.decode('unicode_escape').encode('ascii','ignore')
+    appending(docs, f[1])
 
 
 save_documents = open("documents.pickle", "wb+")
@@ -88,14 +88,14 @@ save_word_features.close()
 
 
 def find_features(sentence):
-	words = word_tokenize(sentence)
-	features = {}
+    words = word_tokenize(sentence)
+    features = {}
 	
-	for word in word_features:
-		# update the features dict with {"word": boolean}
-		features[word] = (word in words) # boolean, if word is in words, return True
-	# return the dictionary of words as keys and booleans as values
-	return features
+    for word in word_features:
+        # update the features dict with {"word": boolean}
+        features[word] = (word in words) # boolean, if word is in words, return True
+    # return the dictionary of words as keys and booleans as values
+    return features
 
 # featuresets is a list of tuples each containing a document and a category
 featuresets = [(find_features(sentence), category) for (sentence, category) in documents]
@@ -138,22 +138,22 @@ algos = {"MultinomialNB_classifier": MultinomialNB_classifier,
 
 
 for i in algos.items():
-	i[1].train(training_set)
-	print i[0], "accuracy: %" + str(nltk.classify.accuracy(i[1], testing_set) * 100)
+    i[1].train(training_set)
+    print i[0], "accuracy: %" + str(nltk.classify.accuracy(i[1], testing_set) * 100)
 	
-	save_classifier = open(i[0]+".pickle", "wb+")
-	pickle.dump(i[1], save_classifier)
-	save_classifier.close()
+    save_classifier = open(i[0]+".pickle", "wb+")
+    pickle.dump(i[1], save_classifier)
+    save_classifier.close()
 	
 
 # set voted_classifier to an instance of the class VoteClassifiers
 voted_classifier = VoteClassifier(classifier, 
-								  MultinomialNB_classifier, 
-								  BernoulliNB_classifier, 
-								  LogisticRegression_classifier, 
-								  NuSVC_classifier,
-								  LinearSVC_classifier,
-								  SGDC_classifier)
+				  MultinomialNB_classifier, 
+				  BernoulliNB_classifier, 
+				  LogisticRegression_classifier, 
+				  NuSVC_classifier,
+				  LinearSVC_classifier,
+				  SGDC_classifier)
 
 print "voted_classifier accuracy: %" + str(nltk.classify.accuracy(voted_classifier, testing_set) * 100)
 
