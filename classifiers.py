@@ -94,7 +94,7 @@ def find_features(sentence):
     for word in word_features:
         # update the features dict with {"word": boolean}
         features[word] = (word in words) # boolean, if word is in words, return True
-    # return the dictionary of words as keys and booleans as values
+    # return the dictionary with words as keys and booleans as values
     return features
 
 # featuresets is a list of tuples each containing a dictionary of {"word": boolean} and the category
@@ -146,7 +146,7 @@ for i in algos.items():
     save_classifier.close()
 	
 
-# set voted_classifier to an instance of the class VoteClassifiers
+# set voted_classifier to an instance of the class VoteClassifier
 voted_classifier = VoteClassifier(classifier, 
 				  MultinomialNB_classifier, 
 				  BernoulliNB_classifier, 
